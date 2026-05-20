@@ -52,8 +52,8 @@ async function runFromContext(ctx: ExtensionCommandContext | ExtensionContext, m
 }
 
 export default function gitAddCommitPush(pi: ExtensionAPI) {
-  pi.registerCommand("git-push-current", {
-    description: "Run git add ., git commit, and git push from the current working directory. Usage: /git-push-current [commit message]",
+  pi.registerCommand("gpush", {
+    description: "Run git add ., git commit, and git push from the current working directory. Usage: /gpush [commit message]",
     handler: async (args, ctx) => {
       try {
         await runFromContext(ctx, args);
@@ -66,12 +66,12 @@ export default function gitAddCommitPush(pi: ExtensionAPI) {
   });
 
   pi.registerTool({
-    name: "git_add_commit_push_current",
-    label: "Git Add Commit Push Current",
+    name: "gpush",
+    label: "Git Push",
     description: "Run git add ., git commit, and git push from Pi's current working directory.",
     promptSnippet: "Commit and push all current git repository changes from the working directory",
     promptGuidelines: [
-      "Use git_add_commit_push_current only when the user explicitly asks to commit and push current repository changes.",
+      "Use gpush only when the user explicitly asks to commit and push current repository changes.",
     ],
     parameters: Type.Object({
       message: Type.Optional(Type.String({ description: "Commit message. If omitted, a timestamped default is used." })),
